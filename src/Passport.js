@@ -1,11 +1,16 @@
 import React from 'react'
 import getQueryParam from './utils/getQueryParam'
 import api from './api'
+import debug from './debug'
 import setSession from './setSession'
 import getSession from './getSession'
 import refreshSession from './refreshSession'
 import verifySession from './verifySession'
 export default class Passport extends React.Component {
+
+    static defaultProps = {
+        redirect: true
+    }
 
     interval = null
 
@@ -74,7 +79,7 @@ export default class Passport extends React.Component {
 
         } catch (e) {
 
-            console.log(e)
+            debug(e)
 
             this.setState({
                 error: 'unexpected error connecting with auth service'
@@ -98,7 +103,7 @@ export default class Passport extends React.Component {
 
         const session = getSession()
 
-        if (!session) {
+        if (!session && this.props.redirect) {
             window.location.href = `${process.env.REACT_APP_SUBLAYER_PASSPORT_CLIENT_URL}?clientId=${process.env.REACT_APP_SUBLAYER_PASSPORT_CLIENT_ID}&redirectUrl=${process.env.REACT_APP_CLIENT_URL}`
         }
 
