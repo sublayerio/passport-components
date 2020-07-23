@@ -1,9 +1,6 @@
-import React, {Component} from 'react'
-
-export default class extends Component {
-  render() {
-    return <div>
-      <h2>Welcome to React components</h2>
-    </div>
-  }
-}
+export { default as getSession } from './getSession'
+export { default as getSessionData } from './getSessionData'
+export { default as clearSession } from './clearSession'
+export { default as refreshSession } from './refreshSession'
+export { default as signout } from './signout'
+export { default as Passport } from './Passport'
