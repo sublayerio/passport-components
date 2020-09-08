@@ -9,7 +9,10 @@ import verifySession from './verifySession'
 export default class Passport extends React.Component {
 
     static defaultProps = {
-        redirect: true
+        redirect: true,
+        clientUrl: process.env.REACT_APP_SUBLAYER_PASSPORT_CLIENT_URL,
+        clientId: process.env.REACT_APP_SUBLAYER_PASSPORT_CLIENT_ID,
+        redirectUrl: process.env.REACT_APP_CLIENT_URL
     }
 
     interval = null
@@ -104,7 +107,7 @@ export default class Passport extends React.Component {
         const session = getSession()
 
         if (!session && this.props.redirect) {
-            window.location.href = `${process.env.REACT_APP_SUBLAYER_PASSPORT_CLIENT_URL}?clientId=${process.env.REACT_APP_SUBLAYER_PASSPORT_CLIENT_ID}&redirectUrl=${process.env.REACT_APP_CLIENT_URL}`
+            window.location.href = `${this.props.clientUrl}?clientId=${this.props.clientId}&redirectUrl=${this.props.redirectUrl}`
         }
 
         return this.props.children
